@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Holy Squirm!"
+run/main_scene="uid://b6x8v0j6y5n3q"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=640
+window/stretch/aspect="keep_width"
+window/stretch/scale_mode="integer"
+
+[dotnet]
+
+project/assembly_name="Holy Squirm!"
+
+[layer_names]
+
+2d_physics/layer_1="wall"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
