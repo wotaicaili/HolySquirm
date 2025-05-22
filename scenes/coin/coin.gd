@@ -5,7 +5,7 @@ class_name Coin
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	position = grid_position * GameManager.GRID_SIZE
+	position = Util.grid2real(grid_position)
 
 func collect():
 	remove_from_group("coin")

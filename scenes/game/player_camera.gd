@@ -1,9 +1,9 @@
 extends Camera2D
 
-# 相机跟随和缩放参数
+# 相机跟随缩放参数
 var zoom_base = 5.0  # 基础缩放值
 var zoom_factor = 0.05  # 缩放系数
-var min_zoom = 0.25  # 最小缩放
+var min_zoom = 1.0  # 最小缩放
 var max_zoom = 4.0  # 最大缩放
 
 func _process(_delta):
@@ -16,7 +16,7 @@ func _process(_delta):
 	
 	# 根据玩家长度动态调整缩放
 	var player_length = GameManager.player.body.size()
-	var target_zoom = zoom_base - (player_length * zoom_factor)
+	var target_zoom = 6.2*0.95**player_length
 	
 	# 限制缩放范围
 	target_zoom = clamp(target_zoom, min_zoom, max_zoom)
