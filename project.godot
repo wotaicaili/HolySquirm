@@ -15,16 +15,27 @@ run/main_scene="uid://b6x8v0j6y5n3q"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://autoload/game_manager.gd"
+Util="*res://autoload/util.gd"
+
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=640
+window/size/viewport_width=768
+window/size/viewport_height=768
 window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
 [dotnet]
 
 project/assembly_name="Holy Squirm!"
+
+[global_group]
+
+coin=""
+player=""
+worm=""
 
 [layer_names]
 

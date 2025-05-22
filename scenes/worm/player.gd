@@ -2,9 +2,10 @@ extends Worm
 class_name Player
 
 func _ready():
-	set_process(true)
+	super._ready()
+	GameManager.player = self
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent):
 	if event is InputEventKey and event.pressed and not event.echo:
 		var new_dir = direction
 		if event.keycode == KEY_UP:
@@ -16,7 +17,7 @@ func _unhandled_input(event):
 		elif event.keycode == KEY_RIGHT:
 			new_dir = Vector2(1, 0)
 		# 防止反向自杀
-		if body.size() > 1 and new_dir == -direction:
+		if new_dir == -direction:
 			return
 		# 立即移动
 		direction = new_dir

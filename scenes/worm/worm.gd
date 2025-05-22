@@ -6,11 +6,8 @@ class_name Worm
 @export var body_texture: Texture2D
 @export var tail_texture: Texture2D
 
-# 网格大小
-const GRID_SIZE = 16
-
 # 身体坐标（Vector2数组，头在前）
-var body: Array = [Vector2(10, 10), Vector2(10, 11), Vector2(10, 12)]
+var body: Array = [Vector2(10, -10), Vector2(10, -11), Vector2(10, -12)]
 
 # 用于显示的Sprite2D节点
 var sprite_nodes: Array = []
@@ -30,17 +27,29 @@ func _ready():
 func _process(delta):
 	move_timer += delta
 	if move_timer >= move_interval:
-		move_timer = 0.0
 		direction = next_direction
 		move(direction)
 
 # 移动：direction为Vector2(0,1)等
-func move(direction: Vector2, grow: bool = false):
+func move(direction: Vector2):
+	var grow = false
 	var new_head = body[0] + direction
 	body.insert(0, new_head)
+	
+	# 检查头部是否碰到 coin
+	var head_pos = body[0]
+	for coin in get_tree().get_nodes_in_group("coin"):
+		if coin.grid_position == head_pos and coin is Coin:
+			grow = true
+			coin.collect()
+			break
+			
 	if not grow:
 		body.pop_back()
 	update_worm_visual()
+	
+	move_timer = 0.0
+
 
 # 断尾：从断点index开始（含index）全部断掉
 func cut_tail(index: int):
@@ -62,7 +71,7 @@ func update_worm_visual():
 			sprite.texture = tail_texture
 		else:
 			sprite.texture = body_texture
-		sprite.position = body[i] * GRID_SIZE + Vector2(GRID_SIZE/2, GRID_SIZE/2)
+		sprite.position = body[i] * GameManager.GRID_SIZE + Vector2(GameManager.GRID_SIZE/2, GameManager.GRID_SIZE/2)
 		sprite.scale = Vector2(0.5, 0.5)  # 32x32缩放到16x16
 		sprite.centered = true  # 居中
 
