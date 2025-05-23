@@ -8,7 +8,7 @@ func _ready():
 	position = Util.grid2real(grid_position)
 
 func collect():
-	remove_from_group("coin")
+	GameManager.grid_coins.set_value(grid_position.x, grid_position.y, 0)
 	animation_player.play("collect")
 	await animation_player.animation_changed
 	queue_free()

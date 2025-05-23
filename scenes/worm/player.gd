@@ -7,15 +7,15 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventKey and event.pressed and not event.echo:
-		var new_dir = Vector2(0, 0)
+		var new_dir = direction # Vector2(0, 0)
 		match event.keycode:
-			KEY_UP:
+			KEY_UP, KEY_W:
 				new_dir = Vector2(0, -1)
-			KEY_DOWN:
+			KEY_DOWN, KEY_S:
 				new_dir = Vector2(0, 1)
-			KEY_LEFT:
+			KEY_LEFT, KEY_A:
 				new_dir = Vector2(-1, 0)
-			KEY_RIGHT:
+			KEY_RIGHT, KEY_D:
 				new_dir = Vector2(1, 0)
 		# 防止反向自杀
 		if new_dir == -direction:
