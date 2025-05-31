@@ -10,4 +10,3 @@ script = ExtResource("1_orqdw")
 head_texture = ExtResource("2_bogjt")
 body_texture = ExtResource("3_baw2p")
 tail_texture = ExtResource("4_dipe0")
-move_interval = 1.0

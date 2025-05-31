@@ -1,6 +1,9 @@
 extends Worm
 class_name Player
 
+# 移动间隔（秒）
+@export var manual_move_interval := 0.2
+
 func _ready():
 	super._ready()
 	GameManager.player = self
@@ -20,6 +23,11 @@ func _unhandled_input(event: InputEvent):
 		# 防止反向自杀
 		if new_dir == -direction:
 			return
+		# 防止抽搐式突进
+		elif new_dir == direction and move_timer < manual_move_interval:
+			return
+		# 隐藏机制：换方向刷新突进冷却，因此扭动前进理论最快
+		
 		if new_dir.length() > 0:
 			# 立即移动
 			direction = new_dir

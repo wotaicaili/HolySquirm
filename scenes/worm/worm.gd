@@ -18,20 +18,18 @@ var direction := Vector2(0, -1)
 var next_direction := Vector2(0, -1)
 
 # 移动间隔（秒）
-@export var move_interval := 0.2
-var move_timer := 0.0
+@export var auto_move_interval := 0.8
+var move_timer := 99.0
 
 func _ready():
 	set_process(true)
 	update_worm_visual()
 
-
 func _process(delta):
 	move_timer += delta
-	if move_timer >= move_interval:
+	if move_timer >= auto_move_interval:
 		direction = next_direction
 		move(direction)
-
 
 func move(direction: Vector2):
 	var new_head = body[0] + direction
@@ -39,11 +37,9 @@ func move(direction: Vector2):
 	
 	# 检查头部是否碰到 coin
 	var head_pos = body[0]
-	for coin in get_tree().get_nodes_in_group("coin"):
-		if coin.grid_position == head_pos and coin is Coin:
-			grow()
-			coin.collect()
-			break
+	var coin = GameManager.grid_coins.get_value(head_pos)
+	if coin:
+		coin.collect()
 			
 	if not to_grow:
 		body.pop_back()
@@ -52,11 +48,10 @@ func move(direction: Vector2):
 	update_worm_visual()
 	
 	move_timer = 0.0
-	
+
 func grow():
 	to_grow += 1
-	
-	
+
 # 断尾：从断点index开始（含index）全部断掉
 func cut_tail(index: int):
 	if index > 0 and index < body.size():
