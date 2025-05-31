@@ -9,7 +9,7 @@ func _ready():
 	GameManager.player = self
 
 func _unhandled_input(event: InputEvent):
-	if event is InputEventKey and event.pressed and not event.echo:
+	if event is InputEventKey and event.pressed and not event.echo and alive:
 		var new_dir = direction # Vector2(0, 0)
 		match event.keycode:
 			KEY_UP, KEY_W:
@@ -27,7 +27,9 @@ func _unhandled_input(event: InputEvent):
 		elif new_dir == direction and move_timer < manual_move_interval:
 			return
 		# 隐藏机制：换方向刷新突进冷却，因此扭动前进理论最快
-		
+		#elif move_timer < manual_move_interval/4.0:
+			#return
+			
 		if new_dir.length() > 0:
 			# 立即移动
 			direction = new_dir

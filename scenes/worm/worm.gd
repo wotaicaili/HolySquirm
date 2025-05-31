@@ -6,9 +6,10 @@ class_name Worm
 @export var body_texture: Texture2D
 @export var tail_texture: Texture2D
 
-# 身体坐标（Vector2数组，头在前）
-var body: Array = [Vector2(10, -10)] # 初始只需要头坐标
+# 位置状态
+var body: Array = [Vector2(10, -10)] # 身体坐标, 初始只需要头坐标
 var to_grow: int = 2 # 还没长出来的体节
+var alive: bool = true
 
 # 用于显示的Sprite2D节点
 var sprite_nodes: Array = []
@@ -33,21 +34,30 @@ func _process(delta):
 
 func move(direction: Vector2):
 	var new_head = body[0] + direction
-	body.insert(0, new_head)
-	
+		
 	# 检查头部是否碰到 coin
-	var head_pos = body[0]
-	var coin = GameManager.grid_coins.get_value(head_pos)
+	var coin = GameManager.grid_coins.get_value(new_head)
 	if coin:
 		coin.collect()
+		to_grow += 1
 			
 	if not to_grow:
 		body.pop_back()
+		GameManager.update_entity()
 	else:
 		to_grow -= 1
+		
+	var value = GameManager.grid_entities.get_value(new_head)
+	if value:
+		print(new_head, value)
+		self.die()
+	
+	body.insert(0, new_head)
 	update_worm_visual()
 	
 	move_timer = 0.0
+	
+	GameManager.update_entity()
 
 func grow():
 	to_grow += 1
@@ -57,6 +67,12 @@ func cut_tail(index: int):
 	if index > 0 and index < body.size():
 		body = body.slice(0, index)
 		update_worm_visual()
+
+func die():
+	alive = false
+	set_process(false)
+	print(str(self), " died")
+	pass
 
 func update_worm_visual():
 	# 先清理旧的sprite

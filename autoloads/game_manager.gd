@@ -7,18 +7,22 @@ const FIELD_Y_RANGE = Vector2(-1, GameManager.FIELD_SIZE.y)
 
 var player: Player
 
-var grid_values: Array2D = Array2D.new(FIELD_X_RANGE, FIELD_Y_RANGE)
-var grid_coins: Array2D = Array2D.new(FIELD_X_RANGE, FIELD_Y_RANGE)
+var grid_entities: Array2D = Array2D.new(FIELD_X_RANGE, FIELD_Y_RANGE, 0)
+var grid_coins: Array2D = Array2D.new(FIELD_X_RANGE, FIELD_Y_RANGE, null)
 
 func _ready() -> void:
 	pass
-
-func _process(delta):
+	
+func init_coins():
+	grid_coins.clear()
 	for coin in get_tree().get_nodes_in_group("coin"):
 		if coin is Coin:
 			var grid_pos = coin.grid_position
 			grid_coins.set_value(grid_pos, coin)
+
+func update_entity():
+	grid_entities.clear()
 	for worm in get_tree().get_nodes_in_group("worm"):
 		if worm is Worm:
 			for grid_pos in worm.body:
-				grid_values.set_value(grid_pos, 1)
+				grid_entities.set_value(grid_pos, 1)
