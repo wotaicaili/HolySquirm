@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://b6x8v0j6y5n3q"]
+[gd_scene load_steps=7 format=4 uid="uid://b6x8v0j6y5n3q"]
 
 [ext_resource type="Script" uid="uid://hua47xuo5k6q" path="res://scenes/game/player_camera.gd" id="1_kelw5"]
 [ext_resource type="Script" uid="uid://c2lsneub1l82r" path="res://scenes/game/game.gd" id="1_lfrn8"]
 [ext_resource type="TileSet" uid="uid://daemitqooxnla" path="res://scenes/game/tiny_town.tres" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://bc6s2qyn6j82p" path="res://scenes/worm/player.tscn" id="3_0sr1o"]
 [ext_resource type="Script" uid="uid://c3jrqdoatx7at" path="res://scenes/game/coin_manager.gd" id="3_kelw5"]
+[ext_resource type="Script" uid="uid://bbg7w18ly0jhh" path="res://scenes/game/debug.gd" id="6_5i0tg"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lfrn8")
@@ -37,3 +38,20 @@ tile_set = ExtResource("1_sul5r")
 
 [node name="CoinManager" type="Node2D" parent="."]
 script = ExtResource("3_kelw5")
+
+[node name="DEBUG" type="CanvasLayer" parent="."]
+script = ExtResource("6_5i0tg")
+debug = true
+
+[node name="CoinInfo" type="Label" parent="DEBUG"]
+custom_minimum_size = Vector2(200, 40)
+offset_top = 61.0
+offset_right = 200.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 24
+
+[node name="PlayerInfo" type="Label" parent="DEBUG"]
+custom_minimum_size = Vector2(200, 40)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 24

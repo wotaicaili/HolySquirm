@@ -8,6 +8,8 @@ func _ready() -> void:
 		var x = randi_range(1, GameManager.FIELD_SIZE.x - 2)
 		var y = randi_range(-3, GameManager.FIELD_SIZE.y + 2)
 		spawn(Vector2(x, y))
+		if y > -40:
+			print(Vector2(x, y))
 		
 func spawn(g_pos: Vector2):
 	var coin = COIN.instantiate()

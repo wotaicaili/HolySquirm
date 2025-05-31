@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bj4y8gwsbju2d"]
+[gd_scene load_steps=25 format=3 uid="uid://bj4y8gwsbju2d"]
 
 [ext_resource type="Script" uid="uid://c2wln2yhbp7pt" path="res://scenes/coin/coin.gd" id="1_u0637"]
 [ext_resource type="Texture2D" uid="uid://cmyjxvhpf8h26" path="res://assets/Coin-Gem Collection/SpinningCoin.png" id="1_yr0ns"]
@@ -197,9 +197,6 @@ _data = {
 &"collect": SubResource("Animation_rarom")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u0637"]
-radius = 5.0
-
 [node name="Coin" type="Node2D" groups=["coin"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_u0637")
@@ -215,8 +212,3 @@ offset = Vector2(0.5, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_igveo")
 }
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_u0637")
