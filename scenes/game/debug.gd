@@ -11,6 +11,8 @@ var player: Player
 
 func _ready() -> void:
 	player = GameManager.player
+	if debug:
+		player.to_grow = 30
 
 func _process(delta: float) -> void:
 	var head = player.body[0]
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 		current_grid_value = null
 	current_grid_info.text = "\n当前位置:\t" + str(current_grid_value)
 	
-	body_info.text = "蛆体总数:\t" + str(GameManager.grid_entities.count_valid())
+	body_info.text = "蛆体总数:\t" + str(GameManager.grid_entities.count_valid() - $"../PotatoManager".get_child_count() * 4)
 	
 func _debug_setter(value: bool):
 	debug = value

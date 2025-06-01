@@ -47,13 +47,14 @@ func move(direction: Vector2):
 	else:
 		to_grow -= 1
 		
-	var value = GameManager.grid_entities.get_value(new_head)
-	if value:
-		print(new_head, value)
+	var entity = GameManager.grid_entities.get_value(new_head)
+	if entity:
+		if entity is Potato:
+			entity.explode()
 		self.die()
-	
-	body.insert(0, new_head)
-	update_worm_visual()
+	else:
+		body.insert(0, new_head)
+		update_worm_visual()
 	
 	move_timer = 0.0
 	

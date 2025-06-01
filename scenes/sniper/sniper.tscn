@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://slgf6p4ch1fe"]
+
+[ext_resource type="Script" uid="uid://bssh8hx62qt4g" path="res://scenes/potato/potato.gd" id="1_8munb"]
+[ext_resource type="Texture2D" uid="uid://cp35djisohbj5" path="res://assets/mine/potato_mine_1.png" id="2_12h7w"]
+[ext_resource type="Texture2D" uid="uid://78cqw7s1hhtp" path="res://assets/mine/potato_mine_2.png" id="3_d4dr0"]
+[ext_resource type="Texture2D" uid="uid://dddypfsbe6e4w" path="res://assets/mine/explosion.png" id="4_klm80"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5tvwn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_12h7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d4dr0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Potato" type="Node2D" groups=["entity"]]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_8munb")
+
+[node name="PotatoAnim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5tvwn")
+autoplay = "default"
+
+[node name="ExplosionSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_klm80")

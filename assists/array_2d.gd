@@ -37,3 +37,12 @@ func count_valid() -> int:
 			if v:
 				count += 1
 	return count
+	
+func count_value(value: int = 1) -> int:
+	var count := 0
+	for y in values:
+		for x in values[y]:
+			var v = values[y][x]
+			if v == value:
+				count += 1
+	return count

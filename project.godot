@@ -36,6 +36,7 @@ project/assembly_name="Holy Squirm!"
 coin=""
 player=""
 worm=""
+entity=""
 
 [layer_names]
 

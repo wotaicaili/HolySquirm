@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dply5j6tjq1u8" path="res://assets/mine/body.png" id="3_tho4f"]
 [ext_resource type="Texture2D" uid="uid://dhsegf6t1buk0" path="res://assets/mine/tail.png" id="4_m7nxi"]
 
-[node name="Worm" type="Node2D" groups=["worm"]]
+[node name="Worm" type="Node2D" groups=["entity", "worm"]]
 script = ExtResource("1_bk7x7")
 head_texture = ExtResource("2_yiom0")
 body_texture = ExtResource("3_tho4f")
